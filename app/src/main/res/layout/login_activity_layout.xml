@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingBottom="40dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
         android:paddingTop="56dp">
@@ -30,9 +31,10 @@
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="@string/e_mail"
                 android:inputType="textEmailAddress"
-                android:text="" />
+                android:focusable="false"
+                android:text="zse@citromail.hu" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -47,27 +49,31 @@
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
-                android:text="" />
-
+                android:focusable="false"
+                android:text="password" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/btnLogin"
+            style="@style/MainButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:layout_marginTop="24dp"
             android:padding="12dp"
-            android:text="Login" />
+            android:text="@string/login" />
 
         <Button
             android:id="@+id/btnRegister"
+            style="@style/SecondaryButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:padding="12dp"
-            android:text="Register" />
+            android:text="@string/register" />
+
 
     </LinearLayout>
 
