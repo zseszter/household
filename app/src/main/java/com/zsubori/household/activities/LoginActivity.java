@@ -39,8 +39,6 @@ public class LoginActivity extends BaseActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         ButterKnife.bind(this);
 
-
-
     }
 
     private boolean isFormValid() {

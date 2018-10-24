@@ -11,4 +11,17 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="title_activity_todo">TodoActivity</string>
+    <string name="title_activity_program">ProgramActivity</string>
+    <string name="title_activity_lunch">LunchActivity</string>
+
+    <string name="this_is_the_original_text">this is the original text</string>
+    <string name="original_assignee">original assignee</string>
+    <string name="add_todo">Add todo</string>
+    <string name="add_new_todo">Új teendő hozzáadása</string>
+    <string name="new_dialog">new dialog</string>
+    <string name="dialog_message">Kérlek, vegyél fel egy új teendőt!</string>
+    <string name="give_todoname">Teendő neve</string>
+    <string name="give_todoassignee">Teendő felelőse</string>
+    <string name="error_wrong_interface">Wrong interface</string>
 </resources>
