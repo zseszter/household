@@ -14,26 +14,14 @@ import com.zsubori.household.data.Todo;
 
 public class TodoMessageFragment extends DialogFragment {
 
+    private TodoHandler todoHandler;
+
     public interface TodoHandler {
         public void onTodoCreated(Todo todo);
     }
 
     public static final String TAG = "DialogFragmentMessage";
     public static final String KEY_MSG = "KEY_MSG";
-
-    private TodoHandler todoHandler;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        if (context instanceof TodoHandler) {
-            todoHandler = (TodoHandler)context;
-        } else {
-            throw new RuntimeException(
-                    getString(R.string.error_wrong_interface));
-        }
-    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -43,7 +31,7 @@ public class TodoMessageFragment extends DialogFragment {
         alertDialogBuilder.setTitle(R.string.add_new_todo);
         alertDialogBuilder.setMessage(message);
 
-        View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_layout, null);
+        View v = getActivity().getLayoutInflater().inflate(R.layout.new_todo_dialog_layout, null);
 
         alertDialogBuilder.setView(v);
 
@@ -62,5 +50,9 @@ public class TodoMessageFragment extends DialogFragment {
         });
 
         return alertDialogBuilder.create();
+    }
+
+    public void addHandler(TodoHandler th) {
+        todoHandler = th;
     }
 }

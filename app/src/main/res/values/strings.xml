@@ -23,5 +23,15 @@
     <string name="dialog_message">Kérlek, vegyél fel egy új teendőt!</string>
     <string name="give_todoname">Teendő neve</string>
     <string name="give_todoassignee">Teendő felelőse</string>
-    <string name="error_wrong_interface">Wrong interface</string>
+    <string name="error_wrong_interface">Doesnt implement TodoHandler interface</string>
+    <string name="add_new_event">Add new event</string>
+    <string name="give_eventName">Esemény neve</string>
+    <string name="choose_event_date">Időpont kiválasztása</string>
+    <string name="choose_event_place">Helyszín kiválasztása</string>
+    <string name="event_comment">Megjegyzés</string>
+    <string name="add_program">Program hozzáadása</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="blank_dashboard">Appearently, this is a blank dashboard.</string>
 </resources>

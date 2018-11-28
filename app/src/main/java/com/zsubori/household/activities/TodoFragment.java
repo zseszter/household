@@ -1,10 +1,14 @@
 package com.zsubori.household.activities;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.zsubori.household.R;
@@ -17,24 +21,31 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TodoActivity extends AppCompatActivity implements TodoMessageFragment.TodoHandler {
+public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHandler {
 
-    @BindView(R.id.my_recycler_view) RecyclerView mRecyclerView;
-    @BindView(R.id.addDialog) Button addDialogBtn;
+    @BindView(R.id.my_recycler_view)
+    RecyclerView mRecyclerView;
+    @BindView(R.id.addDialog)
+    Button addDialogBtn;
 
     private ArrayList<Todo> myDataset;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    public TodoFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.todolist_activity);
-        ButterKnife.bind(this);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_todo, container, false);
+        ButterKnife.bind(this,view);
+
+        //RecyclerView mRecyclerView = container.findViewById(R.id.my_recycler_view);
 
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         myDataset = new ArrayList<Todo>();
@@ -52,13 +63,14 @@ public class TodoActivity extends AppCompatActivity implements TodoMessageFragme
         mAdapter = new TodoAdapter(myDataset);
         mRecyclerView.setAdapter(mAdapter);
 
-        addDialogBtn = (Button) findViewById(R.id.addDialog);
         addDialogBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showMessage(getString(R.string.dialog_message));
             }
         });
+
+        return view;
     }
 
     protected void showMessage(String msg) {
@@ -68,10 +80,14 @@ public class TodoActivity extends AppCompatActivity implements TodoMessageFragme
         bundle.putString(TodoMessageFragment.KEY_MSG, msg);
         dialog.setArguments(bundle);
 
+        dialog.addHandler(this);
+
         dialog.setCancelable(false);
 
         //dialog.show(getSupportFragmentManager(), TodoMessageFragment.TAG);
-        dialog.show(getFragmentManager(), TodoMessageFragment.TAG);
+//        dialog.show(getFragmentManager(), TodoMessageFragment.TAG);
+
+        dialog.show(getChildFragmentManager(), TodoMessageFragment.TAG);
     }
 
     @Override
@@ -79,6 +95,5 @@ public class TodoActivity extends AppCompatActivity implements TodoMessageFragme
         myDataset.add(todo);
         mAdapter.notifyDataSetChanged();
     }
+
 }
-
-

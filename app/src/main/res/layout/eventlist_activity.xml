@@ -5,25 +5,14 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/addEventDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_todo" />
-
-    <Button
-        android:id="@+id/addDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/new_dialog" />
-
-    <TextView
-        android:id="@+id/example"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:text="@string/add_program" />
 
     <android.support.v7.widget.RecyclerView
 
-        android:id="@+id/my_recycler_view"
+        android:id="@+id/event_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical">
@@ -31,4 +20,3 @@
     </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
-

@@ -1,6 +1,5 @@
 package com.zsubori.household.adapter;
 
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -35,7 +34,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.MyViewHolder> 
     public TodoAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                      int viewType) {
         LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.my_text_view, parent, false);
+                .inflate(R.layout.element_todo, parent, false);
 
         TextView todo_name = (TextView) v.findViewById(R.id.todo_name);
 

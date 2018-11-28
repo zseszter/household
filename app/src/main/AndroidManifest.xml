@@ -33,7 +33,7 @@
             android:name=".activities.TodoActivity"
             android:label="@string/title_activity_todo" />
         <activity
-            android:name=".activities.ProgramActivity"
+            android:name=".activities.EventActivity"
             android:label="@string/title_activity_program" />
 
         <activity

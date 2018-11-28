@@ -18,6 +18,14 @@ public class Event {
         this.participants = participants;
     }
 
+    public Event(String eventName, Date eventDate, String eventComment) {
+        this.eventName = eventName;
+        this.eventDate = eventDate;
+        this.eventPlace = null;
+        this.eventComment = eventComment;
+        this.participants = null;
+    }
+
     public String getEventName() {
         return eventName;
     }

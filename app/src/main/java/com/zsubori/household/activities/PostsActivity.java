@@ -1,6 +1,5 @@
 package com.zsubori.household.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.zsubori.household.R;
+import com.zsubori.household.fragment.DashboardFragment;
+import com.zsubori.household.fragment.EventFragment;
 
 public class PostsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -25,6 +26,8 @@ public class PostsActivity extends AppCompatActivity
         setContentView(R.layout.activity_posts);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getFragmentManager().beginTransaction().add(R.id.fragmentContainer, new DashboardFragment()).commit();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -83,15 +86,15 @@ public class PostsActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            Intent i1 = new Intent(PostsActivity.this, TodoActivity.class);
-            startActivity(i1);
+        if (id == R.id.nav_dashboard) {
+            getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new DashboardFragment()).commit();
+        } else if (id == R.id.nav_todos) {
+            getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new TodoFragment()).commit();
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_events) {
+            getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new EventFragment()).commit();
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_lunch) {
 
         } else if (id == R.id.nav_share) {
 
