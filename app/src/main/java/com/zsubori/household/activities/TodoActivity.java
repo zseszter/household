@@ -39,16 +39,6 @@ public class TodoActivity extends AppCompatActivity implements TodoMessageFragme
 
         myDataset = new ArrayList<Todo>();
 
-        Todo t1 = new Todo("Funyiras", "Barnabas");
-        Todo t2 = new Todo("Mosogatas", "Eszter");
-        Todo t3 = new Todo("Fozes", "Anya");
-        Todo t4 = new Todo("Padlas", "Apa");
-
-        myDataset.add(t1);
-        myDataset.add(t2);
-        myDataset.add(t3);
-        myDataset.add(t4);
-
         mAdapter = new TodoAdapter(myDataset);
         mRecyclerView.setAdapter(mAdapter);
 

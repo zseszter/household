@@ -9,7 +9,7 @@ public class Todo {
     private Date deadline;
     private Date fulfillDate;
 
-    Todo() {}
+    public Todo() {}
 
     public Todo(String n, String a, int u, Date d, Date f) {
         name = n;

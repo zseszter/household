@@ -10,6 +10,8 @@ public class Event {
     private String eventComment;
     private ArrayList<User> participants;
 
+    public Event() {}
+
     public Event(String eventName, Date eventDate, String eventPlace, String eventComment, ArrayList<User> participants) {
         this.eventName = eventName;
         this.eventDate = eventDate;

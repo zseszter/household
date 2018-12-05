@@ -4,19 +4,29 @@ import android.app.Fragment;
 import android.os.Bundle;
 
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.zsubori.household.R;
 import com.zsubori.household.adapter.TodoAdapter;
 import com.zsubori.household.data.Todo;
 import com.zsubori.household.fragment.TodoMessageFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,11 +36,14 @@ public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHa
     @BindView(R.id.my_recycler_view)
     RecyclerView mRecyclerView;
     @BindView(R.id.addDialog)
-    Button addDialogBtn;
+    FloatingActionButton addDialogBtn;
 
     private ArrayList<Todo> myDataset;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    FirebaseFirestore db;
+    private String TAG = "database";
 
     public TodoFragment() {
         // Required empty public constructor
@@ -48,17 +61,10 @@ public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHa
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        db = FirebaseFirestore.getInstance();
+
         myDataset = new ArrayList<Todo>();
-
-        Todo t1 = new Todo("Funyiras", "Barnabas");
-        Todo t2 = new Todo("Mosogatas", "Eszter");
-        Todo t3 = new Todo("Fozes", "Anya");
-        Todo t4 = new Todo("Padlas", "Apa");
-
-        myDataset.add(t1);
-        myDataset.add(t2);
-        myDataset.add(t3);
-        myDataset.add(t4);
+        loadTodos();
 
         mAdapter = new TodoAdapter(myDataset);
         mRecyclerView.setAdapter(mAdapter);
@@ -75,25 +81,59 @@ public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHa
 
     protected void showMessage(String msg) {
         TodoMessageFragment dialog = new TodoMessageFragment();
-
         Bundle bundle = new Bundle();
         bundle.putString(TodoMessageFragment.KEY_MSG, msg);
         dialog.setArguments(bundle);
-
         dialog.addHandler(this);
-
         dialog.setCancelable(false);
-
-        //dialog.show(getSupportFragmentManager(), TodoMessageFragment.TAG);
-//        dialog.show(getFragmentManager(), TodoMessageFragment.TAG);
-
         dialog.show(getChildFragmentManager(), TodoMessageFragment.TAG);
     }
 
     @Override
     public void onTodoCreated(Todo todo) {
+        db.collection("todos")
+                .add(todo)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+
         myDataset.add(todo);
         mAdapter.notifyDataSetChanged();
     }
 
+    public void loadTodos() {
+        db.collection("todos")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot documentSnapshots) {
+                        if (documentSnapshots.isEmpty()) {
+                            Log.d(TAG, "onSuccess: LIST EMPTY");
+                        } else {
+                            // Convert the whole Query Snapshot to a list
+                            // of objects directly! No need to fetch each
+                            // document.
+                            for (DocumentSnapshot documentSnapshot : documentSnapshots.getDocuments()) {
+                                Todo myTodo = new Todo();
+
+                                myTodo.setName(documentSnapshot.getString("name"));
+                                myTodo.setAssignee(documentSnapshot.getString("assignee"));
+
+                                myDataset.add(myTodo);
+                            }
+
+                            Log.d(TAG, "onSuccess: " + myDataset);
+                        }
+                    }
+                });
+    }
 }
