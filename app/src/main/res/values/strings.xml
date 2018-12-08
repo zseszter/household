@@ -16,7 +16,7 @@
     <string name="title_activity_lunch">LunchActivity</string>
 
     <string name="this_is_the_original_text">this is the original text</string>
-    <string name="original_assignee">original assignee</string>
+    <string name="original_assignee">No assignee yet</string>
     <string name="add_todo">Add todo</string>
     <string name="add_new_todo">Új teendő hozzáadása</string>
     <string name="new_dialog">new dialog</string>
@@ -34,4 +34,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="blank_dashboard">Appearently, this is a blank dashboard.</string>
+
+    <!-- BottomNavigation labels -->
+    <string name="title_shop">Dashboard</string>
+    <string name="title_gifts">Todos</string>
+    <string name="title_cart">Events</string>
+    <string name="title_profile">Lunch</string>
+
 </resources>

@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.PostsActivity">
+    tools:context=".activities.PostsActivity"
+    android:layout_marginBottom="56dp">
 
    <!-- <Button
         android:id="@+id/addDialog"
@@ -33,6 +34,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="#fdcd2e"
+        android:tint="#eee"
+        app:fabSize="normal"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 </android.support.design.widget.CoordinatorLayout>

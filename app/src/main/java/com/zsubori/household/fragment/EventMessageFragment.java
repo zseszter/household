@@ -51,15 +51,6 @@ public class EventMessageFragment extends DialogFragment {
 
                 Date eventDate = getDateFromDatePicker(datePicker);
 
-                /*date_tv.setOnClickListener(new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        DialogFragment newFragment = new SelectDateFragment();
-                        newFragment.show(getFragmentManager(), "DatePicker");
-                    }
-                });*/
-
-
                 Event myEvent = new Event(eventName.getText().toString(), eventDate, eventComment.getText().toString());
 
                 eventHandler.onEventCreated(myEvent);

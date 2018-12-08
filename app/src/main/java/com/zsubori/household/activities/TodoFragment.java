@@ -64,9 +64,10 @@ public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHa
         db = FirebaseFirestore.getInstance();
 
         myDataset = new ArrayList<Todo>();
+        mAdapter = new TodoAdapter(myDataset);
+
         loadTodos();
 
-        mAdapter = new TodoAdapter(myDataset);
         mRecyclerView.setAdapter(mAdapter);
 
         addDialogBtn.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +77,7 @@ public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHa
             }
         });
 
+        //mAdapter.notifyDataSetChanged();
         return view;
     }
 
@@ -129,6 +131,7 @@ public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHa
                                 myTodo.setAssignee(documentSnapshot.getString("assignee"));
 
                                 myDataset.add(myTodo);
+                                mAdapter.notifyDataSetChanged();
                             }
 
                             Log.d(TAG, "onSuccess: " + myDataset);

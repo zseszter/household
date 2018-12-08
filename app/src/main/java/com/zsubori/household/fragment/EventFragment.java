@@ -63,14 +63,10 @@ public class EventFragment extends Fragment implements EventMessageFragment.Even
         db = FirebaseFirestore.getInstance();
 
         myDataset = new ArrayList<Event>();
+        mAdapter = new EventAdapter(myDataset);
+
         loadEvents();
 
-/*        Event e1 = new Event("Koncert", newDate("2018-10-27"), "Zongoraest a Müpában");
-        Event e2 = new Event("Színház", newDate("2018-11-02"), "Szkéné");
-        Event e3 = new Event("Kirándulás", newDate("2018-11-10"), "Mátrai túra biciklivel és gyerekekkel");*/
-
-
-        mAdapter = new EventAdapter(myDataset);
         mRecyclerView.setAdapter(mAdapter);
 
         addEventDialogBtn.setOnClickListener(new View.OnClickListener() {
@@ -150,6 +146,7 @@ public class EventFragment extends Fragment implements EventMessageFragment.Even
                                 myEvent.setEventDate(documentSnapshot.getDate("eventDate"));
 
                                 myDataset.add(myEvent);
+                                mAdapter.notifyDataSetChanged();
                             }
 
                             Log.d(TAG, "onSuccess: " + myDataset);
@@ -157,5 +154,4 @@ public class EventFragment extends Fragment implements EventMessageFragment.Even
                     }
                 });
     }
-
 }
