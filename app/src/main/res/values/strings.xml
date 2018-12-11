@@ -15,7 +15,7 @@
     <string name="title_activity_program">ProgramActivity</string>
     <string name="title_activity_lunch">LunchActivity</string>
 
-    <string name="this_is_the_original_text">this is the original text</string>
+    <string name="this_is_the_original_text">This is the original text</string>
     <string name="original_assignee">No assignee yet</string>
     <string name="add_todo">Add todo</string>
     <string name="add_new_todo">Új teendő hozzáadása</string>
@@ -36,9 +36,11 @@
     <string name="blank_dashboard">Appearently, this is a blank dashboard.</string>
 
     <!-- BottomNavigation labels -->
-    <string name="title_shop">Dashboard</string>
-    <string name="title_gifts">Todos</string>
-    <string name="title_cart">Events</string>
-    <string name="title_profile">Lunch</string>
+    <string name="assign">Elvállalom</string>
+    <string name="todos">Todos</string>
+    <string name="events">Events</string>
+    <string name="home">Home</string>
+    <string name="lunch">Lunch</string>
+    <string name="chat">Chat</string>
 
 </resources>

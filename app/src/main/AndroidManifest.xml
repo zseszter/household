@@ -3,6 +3,7 @@
     package="com.zsubori.household">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activities.LoginActivity">
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -23,22 +26,27 @@
             android:name=".activities.PostsActivity"
             android:label="@string/title_activity_posts"
             android:parentActivityName=".activities.BaseActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.zsubori.household.activities.BaseActivity" />
         </activity>
 
-        <activity
+<!--        <activity
             android:name=".activities.TodoActivity"
-            android:label="@string/title_activity_todo" />
+            android:label="@string/title_activity_todo"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.EventActivity"
             android:label="@string/title_activity_program" />
 
         <activity
             android:name=".activities.LunchActivity"
-            android:label="@string/title_activity_lunch"></activity>
+            android:label="@string/title_activity_lunch"
+            android:screenOrientation="portrait">
+
+        </activity>-->
     </application>
 
 </manifest>

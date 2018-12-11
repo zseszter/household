@@ -2,23 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_dashboard"
-        android:icon="@drawable/ic_menu_camera"
-        android:title="@string/title_shop" />
-
-    <item
         android:id="@+id/nav_todos"
-        android:icon="@drawable/ic_menu_gallery"
-        android:title="@string/title_gifts" />
+        android:icon="@drawable/ic_shopping_cart_24px"
+        android:title="@string/todos"/>
 
     <item
         android:id="@+id/nav_events"
-        android:icon="@drawable/ic_menu_share"
-        android:title="@string/title_cart" />
+        android:icon="@drawable/ic_date_range_24px"
+        android:title="@string/events" />
+
+    <item
+        android:id="@+id/nav_dashboard"
+        android:icon="@drawable/ic_sentiment_satisfied_24px"
+        android:title="@string/home" />
 
     <item
         android:id="@+id/nav_lunch"
-        android:icon="@drawable/ic_menu_send"
-        android:title="@string/title_profile" />
+        android:icon="@drawable/ic_restaurant_menu_24px"
+        android:title="@string/lunch" />
+
+    <item
+        android:id="@+id/nav_chat"
+        android:icon="@drawable/ic_question_answer_24px"
+        android:title="@string/chat" />
 
 </menu>

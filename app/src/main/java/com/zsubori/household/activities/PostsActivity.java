@@ -26,16 +26,41 @@ public class PostsActivity extends AppCompatActivity
 
     ActionBar actionbar;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_posts);
+        setContentView(R.layout.app_bar_posts);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         actionbar = getSupportActionBar();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setSelectedItemId(R.id.nav_dashboard);
         navigation.setOnNavigationItemReselectedListener(this);
+
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+
+                if (id == R.id.nav_dashboard) {
+                    getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new DashboardFragment()).commit();
+                } else if (id == R.id.nav_todos) {
+                    getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new TodoFragment()).commit();
+
+                } else if (id == R.id.nav_events) {
+                    getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new EventFragment()).commit();
+
+                } else if (id == R.id.nav_lunch) {
+
+                } else if (id == R.id.nav_chat) {
+
+                }
+                return true;
+            }
+        });
 
         getFragmentManager().beginTransaction().add(R.id.fragmentContainer, new DashboardFragment()).commit();
     }
@@ -52,12 +77,12 @@ public class PostsActivity extends AppCompatActivity
     }
 */
 
-/*    @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.posts, menu);
         return true;
-    }*/
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -114,10 +139,6 @@ public class PostsActivity extends AppCompatActivity
             getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new EventFragment()).commit();
 
         } else if (id == R.id.nav_lunch) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
     }

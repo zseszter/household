@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,7 +33,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHandler {
+public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHandler, TodoAdapter.TodoUpdateHandler {
 
     @BindView(R.id.my_recycler_view)
     RecyclerView mRecyclerView;
@@ -76,6 +78,8 @@ public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHa
                 showMessage(getString(R.string.dialog_message));
             }
         });
+
+
 
         //mAdapter.notifyDataSetChanged();
         return view;
@@ -138,5 +142,11 @@ public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHa
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onTodoUpdated(int index, String assignee) {
+        myDataset.get(1).setAssignee(assignee);
+        mAdapter.notifyDataSetChanged();
     }
 }

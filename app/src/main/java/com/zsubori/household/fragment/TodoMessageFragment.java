@@ -27,7 +27,7 @@ public class TodoMessageFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         String message = getArguments().getString(KEY_MSG);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
         alertDialogBuilder.setTitle(R.string.add_new_todo);
         alertDialogBuilder.setMessage(message);
 
@@ -46,6 +46,13 @@ public class TodoMessageFragment extends DialogFragment {
 
                 todoHandler.onTodoCreated(myTodo);
                 dialog.dismiss();
+            }
+        });
+
+        alertDialogBuilder.setNegativeButton("Mégse", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
             }
         });
 
