@@ -17,7 +17,7 @@ public class TodoMessageFragment extends DialogFragment {
     private TodoHandler todoHandler;
 
     public interface TodoHandler {
-        public void onTodoCreated(Todo todo);
+        void onTodoCreated(Todo todo);
     }
 
     public static final String TAG = "DialogFragmentMessage";

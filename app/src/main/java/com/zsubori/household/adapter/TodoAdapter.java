@@ -5,9 +5,11 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Vibrator;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
@@ -33,9 +37,10 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.MyViewHolder> 
     private ViewGroup mParent;
 
     private TodoUpdateHandler todoUpdateHandler;
+    private String TAG;
 
     public interface TodoUpdateHandler {
-        void onTodoUpdated(int index, String assignee);
+        void onTodoUpdated(String id, String assignee);
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -44,6 +49,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.MyViewHolder> 
         public TextView mAssignee;
         public Button mAsigneeBtn;
         public CardView mCardView;
+
         public MyViewHolder(LinearLayout v) {
             super(v);
             mLinearLayout = v;
@@ -112,8 +118,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.MyViewHolder> 
                                     }
                                 }
 
-                                holder.mAssignee.setText(name);
-//                                todoUpdateHandler.onTodoUpdated(position, name);
+                                //holder.mAssignee.setText(mDataset.get(position).getId());
+                                todoUpdateHandler.onTodoUpdated(mDataset.get(position).getId(), name);
+                                //mDataset.get(position).setAssignee(name);
 
 
                             }

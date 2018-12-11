@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,14 +27,16 @@ import com.zsubori.household.R;
 import com.zsubori.household.adapter.TodoAdapter;
 import com.zsubori.household.data.Todo;
 import com.zsubori.household.fragment.TodoMessageFragment;
+import com.zsubori.household.touch.TouchHelperAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHandler, TodoAdapter.TodoUpdateHandler {
+public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHandler, TodoAdapter.TodoUpdateHandler, TouchHelperAdapter {
 
     @BindView(R.id.my_recycler_view)
     RecyclerView mRecyclerView;
@@ -41,7 +44,7 @@ public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHa
     FloatingActionButton addDialogBtn;
 
     private ArrayList<Todo> myDataset;
-    private RecyclerView.Adapter mAdapter;
+    private TodoAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     FirebaseFirestore db;
@@ -67,6 +70,7 @@ public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHa
 
         myDataset = new ArrayList<Todo>();
         mAdapter = new TodoAdapter(myDataset);
+        mAdapter.addUpdateHandler(this);
 
         loadTodos();
 
@@ -96,13 +100,14 @@ public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHa
     }
 
     @Override
-    public void onTodoCreated(Todo todo) {
+    public void onTodoCreated(final Todo todo) {
         db.collection("todos")
                 .add(todo)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        todo.setId(documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -145,8 +150,76 @@ public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHa
     }
 
     @Override
-    public void onTodoUpdated(int index, String assignee) {
-        myDataset.get(1).setAssignee(assignee);
-        mAdapter.notifyDataSetChanged();
+    public void onTodoUpdated(String id, String assignee) {
+        /*myDataset.get(1).setAssignee(assignee);
+        mAdapter.notifyDataSetChanged();*/
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference todoToUpdate = db.collection("todos").document(id);
+
+        todoToUpdate
+                .update("assignee", assignee)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+                        mAdapter.notifyDataSetChanged();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating document", e);
+                    }
+                });
+
+        todoToUpdate
+        .update("id", id)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+                        mAdapter.notifyDataSetChanged();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating document", e);
+                    }
+                });
+
+
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+        final Todo todoToDelete = myDataset.get(position);
+        myDataset.remove(todoToDelete);
+        mAdapter.notifyItemRemoved(position);
+
+        new Thread() {
+            @Override
+            public void run() {
+                //DocumentReference todoToDelete = db.
+                Toast.makeText(getContext(), "Todo deleted", Toast.LENGTH_SHORT).show();
+            }
+        }.start();
+    }
+
+    @Override
+    public void onItemMove(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(myDataset, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(myDataset, i, i - 1);
+            }
+        }
+
+        //notifyDataSetChanged();
+        mAdapter.notifyItemMoved(fromPosition, toPosition);
     }
 }
