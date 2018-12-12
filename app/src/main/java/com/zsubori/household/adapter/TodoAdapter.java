@@ -1,15 +1,12 @@
 package com.zsubori.household.adapter;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Vibrator;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,17 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.zsubori.household.R;
 import com.zsubori.household.data.Todo;
-import com.zsubori.household.fragment.TodoMessageFragment;
 
 import java.util.ArrayList;
 
@@ -56,7 +47,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.MyViewHolder> 
             mTextView = mLinearLayout.findViewById(R.id.todo_name);
             mAssignee = mLinearLayout.findViewById(R.id.todo_assignee);
             mAsigneeBtn = mLinearLayout.findViewById(R.id.assignForTodo);
-            mCardView = mLinearLayout.findViewById(R.id.card_view);
+            mCardView = mLinearLayout.findViewById(R.id.postCard);
         }
     }
 
@@ -92,15 +83,15 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.MyViewHolder> 
                 } else {
                     builder = new AlertDialog.Builder(mParent.getContext());
                 }
-                builder.setTitle("Jelentkezés a feladatra")
-                        .setMessage("Biztosan elvállalod a feladatot?")
+                builder.setTitle("Are you sure?")
+                        .setMessage("Would you like to assign for this task?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 //holder.mAssignee.setText("Felelos beirva");
                                 //holder.mAsigneeBtn.setText("Lejelentkezés");
                                 holder.mAsigneeBtn.setVisibility(View.GONE);
 
-                                String name = "Felelos neve";
+                                String name = "Assignee";
 
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                 if (user != null) {

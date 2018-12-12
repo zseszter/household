@@ -10,11 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,7 +20,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.zsubori.household.R;
 import com.zsubori.household.adapter.EventAdapter;
 import com.zsubori.household.data.Event;
-import com.zsubori.household.data.Todo;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -53,7 +50,7 @@ public class EventFragment extends Fragment implements EventMessageFragment.Even
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.eventlist_activity, container, false);
+        View view = inflater.inflate(R.layout.fragment_event, container, false);
         ButterKnife.bind(this, view);
 
         mRecyclerView.setHasFixedSize(true);
@@ -69,6 +66,7 @@ public class EventFragment extends Fragment implements EventMessageFragment.Even
 
         mRecyclerView.setAdapter(mAdapter);
 
+        addEventDialogBtn.setBackgroundColor(getResources().getColor(R.color.eventColor));
         addEventDialogBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

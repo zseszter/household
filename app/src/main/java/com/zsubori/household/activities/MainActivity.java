@@ -17,23 +17,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.zsubori.household.R;
+import com.zsubori.household.fragment.ChatFragment;
 import com.zsubori.household.fragment.DashboardFragment;
 import com.zsubori.household.fragment.EventFragment;
 
-public class PostsActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity
         //implements NavigationView.OnNavigationItemSelectedListener
         implements BottomNavigationView.OnNavigationItemReselectedListener {
 
     ActionBar actionbar;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_bar_posts);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Home");
+        toolbar.setBackgroundColor(getResources().getColor(R.color.homeColor));
 
         actionbar = getSupportActionBar();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -46,17 +47,24 @@ public class PostsActivity extends AppCompatActivity
                 int id = item.getItemId();
 
                 if (id == R.id.nav_dashboard) {
+                    toolbar.setTitle("Home");
+                    toolbar.setBackgroundColor(getResources().getColor(R.color.homeColor));
                     getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new DashboardFragment()).commit();
                 } else if (id == R.id.nav_todos) {
+                    toolbar.setTitle("Chores");
+                    toolbar.setBackgroundColor(getResources().getColor(R.color.todoColor));
                     getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new TodoFragment()).commit();
-
                 } else if (id == R.id.nav_events) {
+                    toolbar.setTitle("Events");
+                    toolbar.setBackgroundColor(getResources().getColor(R.color.eventColor));
                     getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new EventFragment()).commit();
-
                 } else if (id == R.id.nav_lunch) {
-
+                    toolbar.setTitle("Menus");
+                    toolbar.setBackgroundColor(getResources().getColor(R.color.lunchColor));
                 } else if (id == R.id.nav_chat) {
-
+                    toolbar.setTitle("Chat");
+                    toolbar.setBackgroundColor(getResources().getColor(R.color.postColor));
+                    getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ChatFragment()).commit();
                 }
                 return true;
             }

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,9 +51,7 @@ public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHa
     FirebaseFirestore db;
     private String TAG = "database";
 
-    public TodoFragment() {
-        // Required empty public constructor
-    }
+    public TodoFragment() {}
 
 
     @Override
@@ -82,8 +81,6 @@ public class TodoFragment extends Fragment implements TodoMessageFragment.TodoHa
                 showMessage(getString(R.string.dialog_message));
             }
         });
-
-
 
         //mAdapter.notifyDataSetChanged();
         return view;

@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="bottomNavBar">#ffffff</color>
+
+    <color name="homeColor">#7d8cff</color>
+    <color name="todoColor">#61D26C</color>
+    <color name="eventColor">#32C19A</color>
+    <color name="lunchColor">#f4a66f</color>
+    <color name="postColor">#EEDC68</color>
 </resources>

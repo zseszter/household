@@ -123,7 +123,7 @@ public class LoginActivity extends BaseActivity {
 
                 if (task.isSuccessful()) {
                     startActivity(new Intent(LoginActivity.this,
-                            PostsActivity.class));
+                            MainActivity.class));
                     finish();
 
                 } else {

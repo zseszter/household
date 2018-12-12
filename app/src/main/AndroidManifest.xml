@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name=".activities.PostsActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/title_activity_posts"
             android:parentActivityName=".activities.BaseActivity"
             android:theme="@style/AppTheme.NoActionBar"
